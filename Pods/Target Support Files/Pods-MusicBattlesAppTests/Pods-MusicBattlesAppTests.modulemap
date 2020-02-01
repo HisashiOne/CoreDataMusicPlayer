@@ -1,0 +1,6 @@
+framework module Pods_MusicBattlesAppTests {
+  umbrella header "Pods-MusicBattlesAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
