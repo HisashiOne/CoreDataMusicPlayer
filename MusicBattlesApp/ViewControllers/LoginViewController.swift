@@ -67,6 +67,8 @@ class LoginViewController: UIViewController {
             passTXT.layer.borderWidth = 0
             
             
+            self.performSegue(withIdentifier: "goToMain", sender: self)
+            
         }else{
             debugPrint("Error Login")
             userTXT.layer.borderColor = UIColor.red.cgColor

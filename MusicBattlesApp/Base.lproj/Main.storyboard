@@ -113,7 +113,7 @@
                         <outlet property="passTXT" destination="Kak-CB-Xu1" id="PUM-lG-4C0"/>
                         <outlet property="registerBTN" destination="Pq4-6L-bXf" id="KG7-eL-jO1"/>
                         <outlet property="userTXT" destination="Srz-EC-Hj8" id="LAc-Fy-iDR"/>
-                        <segue destination="rjq-hy-0pN" kind="show" id="OjS-65-B6o"/>
+                        <segue destination="rjq-hy-0pN" kind="show" identifier="goToMain" id="OjS-65-B6o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -123,18 +123,47 @@
         <!--View Controller-->
         <scene sceneID="18N-cZ-VNz">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="rjq-hy-0pN" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="rjq-hy-0pN" customClass="ViewController" customModule="MusicBattlesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gWs-HM-bcx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="53p-KZ-nYL">
+                                <rect key="frame" x="0.0" y="21" width="414" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="HOO-ve-26u"/>
+                                    <constraint firstAttribute="width" constant="414" id="OEk-wD-r4s"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wac-lK-qbx">
+                                <rect key="frame" x="0.0" y="111" width="414" height="785"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="3eR-RP-khH"/>
+                                    <constraint firstAttribute="height" constant="785" id="8GF-gK-HkI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wac-lK-qbx" firstAttribute="top" secondItem="53p-KZ-nYL" secondAttribute="bottom" id="Cck-2N-rsZ"/>
+                            <constraint firstAttribute="bottom" secondItem="wac-lK-qbx" secondAttribute="bottom" id="LTh-Oa-YVH"/>
+                            <constraint firstItem="wac-lK-qbx" firstAttribute="trailing" secondItem="1GU-7e-ToO" secondAttribute="trailing" id="WeU-hi-J3a"/>
+                            <constraint firstItem="53p-KZ-nYL" firstAttribute="leading" secondItem="1GU-7e-ToO" secondAttribute="leading" id="WnH-ir-NK2"/>
+                            <constraint firstItem="53p-KZ-nYL" firstAttribute="top" secondItem="gWs-HM-bcx" secondAttribute="top" constant="21" id="hjk-zy-TJm"/>
+                            <constraint firstItem="53p-KZ-nYL" firstAttribute="trailing" secondItem="1GU-7e-ToO" secondAttribute="trailing" id="lWj-ik-WGm"/>
+                            <constraint firstItem="wac-lK-qbx" firstAttribute="leading" secondItem="1GU-7e-ToO" secondAttribute="leading" id="tXC-j2-Qf6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="1GU-7e-ToO"/>
                     </view>
                     <navigationItem key="navigationItem" id="jec-yE-yxf"/>
+                    <connections>
+                        <outlet property="containerView" destination="wac-lK-qbx" id="QD7-7o-WAs"/>
+                        <outlet property="navigationView" destination="53p-KZ-nYL" id="u2V-US-qIY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dU2-1C-oxc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1346" y="480"/>
+            <point key="canvasLocation" x="1344.9275362318842" y="479.46428571428567"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="iNf-q7-N6N">
@@ -312,6 +341,6 @@
         <image name="userICS" width="216" height="224"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xS2-E3-pyv"/>
+        <segue reference="OjS-65-B6o"/>
     </inferredMetricsTieBreakers>
 </document>
