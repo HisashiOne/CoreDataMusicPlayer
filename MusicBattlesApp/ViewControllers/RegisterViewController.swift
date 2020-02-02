@@ -8,6 +8,7 @@
 
 import UIKit
 import TTGSnackbar
+import CoreData
 
 class RegisterViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  UITextViewDelegate {
     
@@ -23,6 +24,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var registerBTN: UIButton!
     
     let imagePicker = UIImagePickerController()
+    var userCoreData = [User]()
     
     
     
@@ -31,6 +33,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         super.viewDidLoad()
         self.initView()
         self.setGradientBackground()
+        self.loadUsers()
 
         // Do any additional setup after loading the view.
     }
@@ -69,6 +72,51 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        
+    }
+    
+    //PRAGMA MARK: CoreData
+    
+    func saveUser(){
+        
+        let image = avatarImageView.image
+        let data = image?.jpegData(compressionQuality: 0.5)
+        
+        let user_ = User(context: persitantService.context)
+        user_.user = userTXT.text!
+        user_.name = nameTXT.text!
+        user_.secondname = secondNameTXT.text!
+        user_.password = passTXT.text!
+        user_.bio = ""
+        user_.birthdate = birthBTN.currentTitle
+        user_.avatar = data
+        
+        
+        
+        persitantService.saveContext()
+        
+    }
+    
+    func loadUsers(){
+         let  fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        
+        
+        do{
+            let userCoreData = try
+                persitantService.context.fetch(fetchRequest)
+                   self.userCoreData = userCoreData
+                   if userCoreData.count > 0 {
+                     
+                     
+                       debugPrint("User CoreData  DB Total  \(userCoreData)")
+                       
+                   }else{
+                    
+                         debugPrint("User CoreData  No Data ")
+                    }
+                   
+               }catch{}
         
         
     }
@@ -129,6 +177,9 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         
         if userBool && nameBool && secondBool && passBool && birthBTN.currentTitle != "Fecha de Nacimiento"{
             debugPrint("All Fields OK")
+            self.saveUser()
+            
+            
         }else{
            
             let snackbar = TTGSnackbar(message: "Completa los datos faltantes", duration: .middle)

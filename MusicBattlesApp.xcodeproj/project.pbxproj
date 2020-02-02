@@ -25,6 +25,9 @@
 		2138C3AC23E66F3B008DF721 /* galleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3AB23E66F3B008DF721 /* galleryView.swift */; };
 		2138C3AE23E66FAE008DF721 /* playerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3AD23E66FAE008DF721 /* playerView.swift */; };
 		2138C3B223E6712B008DF721 /* userView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3B123E6712B008DF721 /* userView_.swift */; };
+		2138C3B623E6BACB008DF721 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3B423E6BACB008DF721 /* User+CoreDataClass.swift */; };
+		2138C3B723E6BACB008DF721 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3B523E6BACB008DF721 /* User+CoreDataProperties.swift */; };
+		2138C3B923E6BEBD008DF721 /* persitantService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3B823E6BEBD008DF721 /* persitantService.swift */; };
 		8E8641DADFC69D75F2BF1137 /* Pods_MusicBattlesApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743758E5FD9717236D535F6B /* Pods_MusicBattlesApp.framework */; };
 		B986782C0B400086AA3C2971 /* Pods_MusicBattlesAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDDDD1811485DCA2D5CB78 /* Pods_MusicBattlesAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -73,6 +76,9 @@
 		2138C3AB23E66F3B008DF721 /* galleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = galleryView.swift; sourceTree = "<group>"; };
 		2138C3AD23E66FAE008DF721 /* playerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playerView.swift; sourceTree = "<group>"; };
 		2138C3B123E6712B008DF721 /* userView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userView_.swift; sourceTree = "<group>"; };
+		2138C3B423E6BACB008DF721 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2138C3B523E6BACB008DF721 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2138C3B823E6BEBD008DF721 /* persitantService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = persitantService.swift; sourceTree = "<group>"; };
 		2E520EAD10AF51C3F068F8B5 /* Pods-MusicBattlesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBattlesApp.debug.xcconfig"; path = "Target Support Files/Pods-MusicBattlesApp/Pods-MusicBattlesApp.debug.xcconfig"; sourceTree = "<group>"; };
 		34B23D3146E87BCE4CE24CFA /* Pods-MusicBattlesAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBattlesAppTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicBattlesAppTests/Pods-MusicBattlesAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		743758E5FD9717236D535F6B /* Pods_MusicBattlesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicBattlesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +143,7 @@
 				2138C39C23E2ABD0008DF721 /* ViewControllers */,
 				2138C3A323E66DED008DF721 /* Nibs */,
 				2138C3A423E66E08008DF721 /* Views */,
+				2138C3B323E6B9FD008DF721 /* CoreData */,
 				2138C36923E2A325008DF721 /* AppDelegate.swift */,
 				2138C36B23E2A325008DF721 /* SceneDelegate.swift */,
 				2138C36F23E2A325008DF721 /* Main.storyboard */,
@@ -194,6 +201,16 @@
 				2138C3B123E6712B008DF721 /* userView_.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2138C3B323E6B9FD008DF721 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2138C3B423E6BACB008DF721 /* User+CoreDataClass.swift */,
+				2138C3B523E6BACB008DF721 /* User+CoreDataProperties.swift */,
+				2138C3B823E6BEBD008DF721 /* persitantService.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		88D8F8EF0E96B1559E77F96E /* Pods */ = {
@@ -443,12 +460,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2138C3B923E6BEBD008DF721 /* persitantService.swift in Sources */,
 				2138C3A223E3DD37008DF721 /* LoginViewController.swift in Sources */,
 				2138C36E23E2A325008DF721 /* ViewController.swift in Sources */,
 				2138C3AC23E66F3B008DF721 /* galleryView.swift in Sources */,
 				2138C3AE23E66FAE008DF721 /* playerView.swift in Sources */,
+				2138C3B623E6BACB008DF721 /* User+CoreDataClass.swift in Sources */,
 				2138C3A023E2AC79008DF721 /* RegisterViewController.swift in Sources */,
 				2138C3B223E6712B008DF721 /* userView_.swift in Sources */,
+				2138C3B723E6BACB008DF721 /* User+CoreDataProperties.swift in Sources */,
 				2138C37423E2A325008DF721 /* MusicBattlesApp.xcdatamodeld in Sources */,
 				2138C36A23E2A325008DF721 /* AppDelegate.swift in Sources */,
 				2138C36C23E2A325008DF721 /* SceneDelegate.swift in Sources */,
