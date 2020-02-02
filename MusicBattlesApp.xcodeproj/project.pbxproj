@@ -24,7 +24,7 @@
 		2138C3AA23E66EC1008DF721 /* userView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2138C3A923E66EC1008DF721 /* userView.xib */; };
 		2138C3AC23E66F3B008DF721 /* galleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3AB23E66F3B008DF721 /* galleryView.swift */; };
 		2138C3AE23E66FAE008DF721 /* playerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3AD23E66FAE008DF721 /* playerView.swift */; };
-		2138C3B023E66FBD008DF721 /* userView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3AF23E66FBD008DF721 /* userView.swift */; };
+		2138C3B223E6712B008DF721 /* userView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C3B123E6712B008DF721 /* userView_.swift */; };
 		8E8641DADFC69D75F2BF1137 /* Pods_MusicBattlesApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743758E5FD9717236D535F6B /* Pods_MusicBattlesApp.framework */; };
 		B986782C0B400086AA3C2971 /* Pods_MusicBattlesAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04CDDDD1811485DCA2D5CB78 /* Pods_MusicBattlesAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -72,7 +72,7 @@
 		2138C3A923E66EC1008DF721 /* userView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = userView.xib; sourceTree = "<group>"; };
 		2138C3AB23E66F3B008DF721 /* galleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = galleryView.swift; sourceTree = "<group>"; };
 		2138C3AD23E66FAE008DF721 /* playerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playerView.swift; sourceTree = "<group>"; };
-		2138C3AF23E66FBD008DF721 /* userView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userView.swift; sourceTree = "<group>"; };
+		2138C3B123E6712B008DF721 /* userView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userView_.swift; sourceTree = "<group>"; };
 		2E520EAD10AF51C3F068F8B5 /* Pods-MusicBattlesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBattlesApp.debug.xcconfig"; path = "Target Support Files/Pods-MusicBattlesApp/Pods-MusicBattlesApp.debug.xcconfig"; sourceTree = "<group>"; };
 		34B23D3146E87BCE4CE24CFA /* Pods-MusicBattlesAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBattlesAppTests.debug.xcconfig"; path = "Target Support Files/Pods-MusicBattlesAppTests/Pods-MusicBattlesAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		743758E5FD9717236D535F6B /* Pods_MusicBattlesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicBattlesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,7 +191,7 @@
 			children = (
 				2138C3AB23E66F3B008DF721 /* galleryView.swift */,
 				2138C3AD23E66FAE008DF721 /* playerView.swift */,
-				2138C3AF23E66FBD008DF721 /* userView.swift */,
+				2138C3B123E6712B008DF721 /* userView_.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -448,8 +448,8 @@
 				2138C3AC23E66F3B008DF721 /* galleryView.swift in Sources */,
 				2138C3AE23E66FAE008DF721 /* playerView.swift in Sources */,
 				2138C3A023E2AC79008DF721 /* RegisterViewController.swift in Sources */,
+				2138C3B223E6712B008DF721 /* userView_.swift in Sources */,
 				2138C37423E2A325008DF721 /* MusicBattlesApp.xcdatamodeld in Sources */,
-				2138C3B023E66FBD008DF721 /* userView.swift in Sources */,
 				2138C36A23E2A325008DF721 /* AppDelegate.swift in Sources */,
 				2138C36C23E2A325008DF721 /* SceneDelegate.swift in Sources */,
 			);

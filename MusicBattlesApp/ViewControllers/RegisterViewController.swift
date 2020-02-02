@@ -11,8 +11,6 @@ import TTGSnackbar
 
 class RegisterViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  UITextViewDelegate {
     
-
-    @IBOutlet weak var backBTN: UIButton!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var avatarBTN: UIButton!
     
@@ -53,7 +51,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         avatarBTN.layer.cornerRadius = 5
         
     
-        backBTN.addTarget(self, action: #selector(backView(Sender:)), for: .touchUpInside)
+
         birthBTN.addTarget(self, action: #selector(datePicker(sender:)), for: .touchUpInside)
         avatarBTN.addTarget(self, action: #selector(photoPicker(sender:)), for: .touchUpInside)
         registerBTN.addTarget(self, action: #selector(validateRegister(_:)), for: .touchUpInside)
@@ -66,6 +64,12 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         view.addGestureRecognizer(tap)
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        
         
     }
     
@@ -174,11 +178,6 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     
-    @objc func backView(Sender: Any){
-        
-        self.dismiss(animated: true, completion: nil)
-        
-    }
     
     @objc func photoPicker(sender: Any){
         

@@ -35,8 +35,17 @@ class LoginViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
 
         view.addGestureRecognizer(tap)
+        self.navigationController?.isNavigationBarHidden = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     func setGradientBackground() {
         let colorTop =  UIColor(red:0.00, green:0.83, blue:1.00, alpha:1.0).cgColor

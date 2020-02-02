@@ -1,5 +1,5 @@
 //
-//  userView.swift
+//  userView_.swift
 //  MusicBattlesApp
 //
 //  Created by Oswaldo Morales on 2/1/20.
@@ -8,8 +8,9 @@
 
 import UIKit
 
-class userView: UIView {
+class userView_: UIView {
 
+    @IBOutlet weak var logoutBTN: UIButton!
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
