@@ -25,6 +25,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     
     let imagePicker = UIImagePickerController()
     var userCoreData = [User]()
+    var userArray: Array<String> = []
     
     
     
@@ -88,9 +89,11 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         user_.name = nameTXT.text!
         user_.secondname = secondNameTXT.text!
         user_.password = passTXT.text!
-        user_.bio = ""
+        user_.bio = bioTXT.text!
         user_.birthdate = birthBTN.currentTitle
         user_.avatar = data
+        
+        
         
         
         
@@ -107,10 +110,20 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                 persitantService.context.fetch(fetchRequest)
                    self.userCoreData = userCoreData
                    if userCoreData.count > 0 {
-                     
-                     
-                       debugPrint("User CoreData  DB Total  \(userCoreData)")
-                       
+
+            
+                    let userNames = userCoreData[0].user!
+                    
+                    debugPrint("User CoreData  DB Total  \(userCoreData)")
+                    debugPrint("User Array 0 \(userNames)")
+                    
+                    for index in 0..<userCoreData.count{
+                                       
+                    let user_ =  userCoreData[index].user!
+                    userArray.append(user_)
+                        
+                    }
+                    
                    }else{
                     
                          debugPrint("User CoreData  No Data ")
@@ -177,7 +190,40 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         
         if userBool && nameBool && secondBool && passBool && birthBTN.currentTitle != "Fecha de Nacimiento"{
             debugPrint("All Fields OK")
-            self.saveUser()
+            
+            if userCoreData.count > 0{
+                
+                
+                if userArray.contains(userTXT.text!){
+                    
+                    let indexExist = userArray.firstIndex(of: userTXT.text!)
+                    debugPrint("User Alredy Exist Index \(indexExist ?? 0)")
+                    let snackbar = TTGSnackbar(message: "Ese Nombre de usuario ya existe escoje otro", duration: .middle)
+                    snackbar.show()
+                                   
+                    userTXT.layer.borderWidth = 1
+                    userTXT.layer.borderColor = UIColor.red.cgColor
+                    
+                    
+                }else{
+                    
+                    userTXT.layer.borderWidth = 0
+                    self.saveUser()
+                    
+                    let defaults = UserDefaults.standard
+                    defaults.set(userTXT.text, forKey: "user")
+                    self.performSegue(withIdentifier: "goToMain", sender: self)
+                    
+                    
+                }
+                              
+                
+    
+                
+            }else{
+                
+                self.saveUser()
+            }
             
             
         }else{

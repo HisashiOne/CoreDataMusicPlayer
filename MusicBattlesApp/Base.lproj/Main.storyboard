@@ -21,7 +21,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHo-MK-BpQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-770" y="110"/>
+            <point key="canvasLocation" x="-1229" y="110"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -51,7 +51,7 @@
                                 </constraints>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EG6-Ad-zVw">
                                 <rect key="frame" x="70" y="536" width="274" height="40"/>
@@ -140,7 +140,7 @@
         <!--View Controller-->
         <scene sceneID="18N-cZ-VNz">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="rjq-hy-0pN" customClass="ViewController" customModule="MusicBattlesApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="homeVC" storyboardIdentifier="homeVC" modalPresentationStyle="fullScreen" id="rjq-hy-0pN" customClass="ViewController" customModule="MusicBattlesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gWs-HM-bcx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -254,7 +254,7 @@
                                             <constraint firstAttribute="width" constant="274" id="Oib-mm-nK2"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -331,7 +331,7 @@
                         <outlet property="registerBTN" destination="fKz-8T-fdj" id="DlC-k6-zNP"/>
                         <outlet property="secondNameTXT" destination="HXz-6O-bUU" id="5cz-b9-AQX"/>
                         <outlet property="userTXT" destination="gNo-gi-t8y" id="iVF-ob-VEA"/>
-                        <segue destination="rjq-hy-0pN" kind="show" id="xS2-E3-pyv"/>
+                        <segue destination="rjq-hy-0pN" kind="show" identifier="goToMain" id="xS2-E3-pyv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQl-95-jpz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -8,6 +8,7 @@
 
 import UIKit
 import TTGSnackbar
+import CoreData
 
 class LoginViewController: UIViewController {
     
@@ -16,12 +17,23 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginBTN: UIButton!
     @IBOutlet weak var registerBTN: UIButton!
     
+    var userCoreData = [User]()
+    var userArray: Array<String> = []
+    
     
 
     override func viewDidLoad() {
+
+        let defaults = UserDefaults.standard
+        let user_ = defaults.string(forKey: "user")
+        if user_ != nil{
+        self.performSegue(withIdentifier: "goToMain", sender: self)
+        }
         super.viewDidLoad()
+        
         self.initViews()
         self.setGradientBackground()
+        self.loadUsers()
     }
     
     private func initViews(){
@@ -71,15 +83,48 @@ class LoginViewController: UIViewController {
         
         if (!userTXT.text!.isEmpty || !passTXT.text!.isEmpty){
             
+            if userCoreData.count > 0 {
+                
+                 if userArray.contains(userTXT.text!){
+                    
+                    let indexUser = userArray.firstIndex(of: userTXT.text!)!
+                    let pass = userCoreData[indexUser].password
+                    
+                    if pass == passTXT.text{
+                        
+                        
+                        userTXT.layer.borderWidth = 0
+                        passTXT.layer.borderWidth = 0
+                        let defaults = UserDefaults.standard
+                        defaults.set(userTXT.text, forKey: "user")
+                        self.performSegue(withIdentifier: "goToMain", sender: self)
+                                  
+                        
+                    }else{
+                        
+                        debugPrint("Error Login 2 No Match Pass")
+                        self.showErrorLogin()
+                    }
+                    
+                    
+                    
+                 }else{
+                    
+                    debugPrint("Error Login 2 No User in DB")
+                    self.showErrorLogin()
+                    
+                }
+                
+                
+            }else{
+                
+                debugPrint("Error Login 2 No DB")
+                showErrorLogin()
+            }
             
-            userTXT.layer.borderWidth = 0
-            passTXT.layer.borderWidth = 0
-            
-            
-            self.performSegue(withIdentifier: "goToMain", sender: self)
-            
+          
         }else{
-            debugPrint("Error Login")
+            debugPrint("Error Login 1")
             userTXT.layer.borderColor = UIColor.red.cgColor
             passTXT.layer.borderColor = UIColor.red.cgColor
             userTXT.layer.borderWidth = 1
@@ -88,10 +133,56 @@ class LoginViewController: UIViewController {
             snackbar.show()
         }
         
-       
+    
+    }
+    
+    private func showErrorLogin(){
         
+        userTXT.layer.borderColor = UIColor.red.cgColor
+        passTXT.layer.borderColor = UIColor.red.cgColor
+        userTXT.layer.borderWidth = 1
+        passTXT.layer.borderWidth = 1
+        let snackbar = TTGSnackbar(message: "Usuario o Contraseña incorrectos", duration: .middle)
+        snackbar.show()
+
         
     }
+    
+    
+    //PRAGMA MARK: Core Data
+    func loadUsers(){
+            let  fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+           
+           
+           do{
+               let userCoreData = try
+                   persitantService.context.fetch(fetchRequest)
+                      self.userCoreData = userCoreData
+                      if userCoreData.count > 0 {
+
+               
+                       let userNames = userCoreData[0].user!
+                       
+                       debugPrint("User CoreData  DB Total  \(userCoreData)")
+                       debugPrint("User Array 0 \(userNames)")
+                       
+                       for index in 0..<userCoreData.count{
+                                          
+                       let user_ =  userCoreData[index].user!
+                       userArray.append(user_)
+                           
+                       }
+                       
+                      }else{
+                       
+                            debugPrint("User CoreData  No Data ")
+                       }
+                      
+                  }catch{}
+           
+           
+       }
+       
 
 
 

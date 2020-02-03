@@ -8,8 +8,11 @@
 
 import UIKit
 import SWSegmentedControl
+import TTGSnackbar
+import CoreData
 
-class ViewController: UIViewController {
+
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  UITextViewDelegate {
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var navigationView: UIView!
@@ -18,12 +21,19 @@ class ViewController: UIViewController {
     var playerView_: playerView!
     var userView: userView_!
     
+    var userDB: String!
+    var indexUser: Int!
+    var userCoreData = [User]()
+    var userArray: Array<String> = []
+    let imagePicker = UIImagePickerController()
+    
     let sc = SWSegmentedControl(items: ["GALLERY", "PLAYER", "USER"])
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        
         
         sc.frame = self.navigationView.frame
         sc.titleColor = .white
@@ -37,7 +47,26 @@ class ViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.isNavigationBarHidden = true
         self.setGradientBackground()
-        self.initView()
+       
+        
+        let defaults = UserDefaults.standard
+        userDB = defaults.string(forKey: "user")
+        
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+              
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+              view.addGestureRecognizer(tap)
+        
+        self.loadUsers()
+        self.loadIndexUser()
+        
+         self.initView()
+        
+   
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +106,8 @@ class ViewController: UIViewController {
         userView.frame.origin.y =  self.containerView.frame.origin.y - 100
         containerView.addSubview(userView)
         userView.isHidden = true
+        
+        initUser()
     
         userView.logoutBTN.addTarget(self, action: #selector(logoutUser(_:)), for: .touchUpInside)
         self.navigationController?.isNavigationBarHidden = true
@@ -111,6 +142,35 @@ class ViewController: UIViewController {
         
     }
     
+    @objc func dismissKeyboard() {
+                //Causes the view (or one of its embedded text fields) to resign the first responder status.
+                view.endEditing(true)
+         }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+             if self.view.frame.origin.y == 0{
+                 self.view.frame.origin.y -= keyboardSize.height - 100
+             }
+         }
+     }
+     
+     @objc func keyboardWillHide(notification: NSNotification) {
+        if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+             if self.view.frame.origin.y != 0{
+                 //self.view.frame.origin.y += keyboardSize.height
+                 
+                 let screenSize: CGRect = UIScreen.main.bounds
+                 
+                 self.view.backgroundColor = .white
+                 self.view.frame =  CGRect.init(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
+                 
+             }
+         }
+     }
+     
+    
+    
     //PRAGMA MARK: UserView
     
     @objc func logoutUser(_ Sender: Any){
@@ -118,6 +178,9 @@ class ViewController: UIViewController {
         debugPrint("Logout User")
         //self.dismiss(animated: true, completion: nil)
        // self.navigationController?.popToRootViewController(animated: true)
+        
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "user")
         _ = navigationController?.popViewController(animated: true)
         
     }
@@ -133,6 +196,199 @@ class ViewController: UIViewController {
 
            self.view.layer.insertSublayer(gradientLayer, at:0)
        }
+    
+    //PRAGMA MARK: User
+    
+    func initUser(){
+        
+        userView.avatarImage.layer.cornerRadius = 50
+        userView.nameTXT.layer.cornerRadius = 10
+        userView.seccondTXT.layer.cornerRadius = 10
+        userView.birthBTN.layer.cornerRadius = 10
+        userView.passTXT.layer.cornerRadius = 10
+        
+        userView.saveBTN.layer.cornerRadius = 10
+        userView.saveBTN.layer.borderColor = UIColor.white.cgColor
+        userView.saveBTN.layer.borderWidth = 1
+     
+        userView.logoutBTN.layer.cornerRadius = 10
+        userView.logoutBTN.layer.borderColor = UIColor.white.cgColor
+        userView.logoutBTN.layer.borderWidth = 1
+        
+        userView.avatarBTN.layer.cornerRadius = 10
+        userView.avatarBTN.layer.borderColor = UIColor.white.cgColor
+        userView.avatarBTN.layer.borderWidth = 1
+        
+        userView.userLBL.text = userCoreData[indexUser].user
+        userView.nameTXT.text =  userCoreData[indexUser].name
+        userView.seccondTXT.text = userCoreData[indexUser].secondname
+        userView.passTXT.text = userCoreData[indexUser].password
+        userView.bioTXT.text =  userCoreData[indexUser].bio
+        userView.birthBTN.setTitle(userCoreData[indexUser].birthdate, for: .normal)
+        
+        userView.avatarImage.contentMode = .scaleAspectFill
+        
+        userView.birthBTN.addTarget(self, action: #selector(datePicker(sender:)), for: .touchUpInside)
+
+        
+        let data_ = userCoreData[indexUser].avatar!
+        let image_ = UIImage(data: data_)
+        userView.avatarImage.image = image_
+        
+        imagePicker.delegate = self
+        
+        userView.saveBTN.addTarget(self, action: #selector(updateUser(_:)), for: .touchUpInside)
+        userView.avatarBTN.addTarget(self, action: #selector(photoPicker(sender:)), for: .touchUpInside)
+        
+        
+        
+        
+        
+        
+    }
+    
+    @objc func datePicker(sender: Any){
+           
+       view.endEditing(true)
+           
+        let myDatePicker: UIDatePicker = UIDatePicker()
+        myDatePicker.timeZone = NSTimeZone.local
+        myDatePicker.frame = CGRect(x: 0, y: 15, width: 270, height: 200)
+           myDatePicker.datePickerMode = .date
+        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n", message: nil, preferredStyle: UIAlertController.Style.alert)
+        alertController.view.addSubview(myDatePicker)
+        let selectAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
+           
+           
+           
+           let formatter = DateFormatter()
+           formatter.dateFormat = "dd-MM-yyyy"
+           formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone?
+           let dateSelected = (formatter.string(from: myDatePicker.date)).uppercased()
+            self.userView.birthBTN.setTitle(dateSelected, for: .normal)
+          // print("Selected Date: \(myDatePicker.date)")
+           
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
+        alertController.addAction(selectAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion:{})
+           
+       }
+       
+    
+    
+    @objc func updateUser(_ sender: Any){
+        
+        debugPrint("Update User")
+        
+        
+        if !userView.nameTXT.text!.isEmpty{
+            userCoreData[indexUser].name = userView.nameTXT.text!
+        }
+        
+        if !userView.seccondTXT.text!.isEmpty{
+            userCoreData[indexUser].secondname = userView.seccondTXT.text!
+        }
+        if !userView.passTXT.text!.isEmpty{
+            userCoreData[indexUser].password = userView.passTXT.text!
+        }
+        
+        if !userView.bioTXT.text!.isEmpty{
+            userCoreData[indexUser].bio = userView.bioTXT.text!
+        }
+        
+        userCoreData[indexUser].birthdate = userView.birthBTN.currentTitle
+        let image = userView.avatarImage.image
+        let data = image?.jpegData(compressionQuality: 0.5)
+        
+        userCoreData[indexUser].avatar = data
+    
+        
+        persitantService.saveContext()
+        
+        let snackbar = TTGSnackbar(message: "Datos Guardados Crrectamente", duration: .middle)
+        snackbar.show()
+        
+        
+    }
+    
+    @objc func photoPicker(sender: Any){
+           
+           imagePicker.allowsEditing = false
+           imagePicker.sourceType = .photoLibrary
+                 
+           present(imagePicker, animated: true, completion: nil)
+           
+       }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+           
+           if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+           
+           debugPrint("Selected Image")
+            userView.avatarImage.contentMode = .scaleAspectFill
+            userView.avatarImage.image = pickedImage
+           }
+           
+           dismiss(animated: true, completion: nil)
+       }
+       
+       
+
+     
+       func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+           
+           dismiss(animated: true, completion: nil)
+           
+       }
+       
+    
+    
+    
+    
+    //PRAGMA MARK: Core Data
+      func loadUsers(){
+              let  fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+             
+             
+             do{
+                 let userCoreData = try
+                     persitantService.context.fetch(fetchRequest)
+                        self.userCoreData = userCoreData
+                        if userCoreData.count > 0 {
+
+                 
+                         let userNames = userCoreData[0].user!
+                         
+                         debugPrint("User CoreData  DB Total  \(userCoreData)")
+                         debugPrint("User Array 0 \(userNames)")
+                         
+                         for index in 0..<userCoreData.count{
+                                            
+                         let user_ =  userCoreData[index].user!
+                         userArray.append(user_)
+                             
+                         }
+                         
+                        }else{
+                         
+                           
+                         }
+                        
+                    }catch{}
+             
+             
+         }
+         
+    
+    private func loadIndexUser(){
+        indexUser = userArray.firstIndex(of: userDB)!
+        
+        debugPrint("Home User Index \(indexUser ?? 0)")
+        
+        
+    }
        
 
 
