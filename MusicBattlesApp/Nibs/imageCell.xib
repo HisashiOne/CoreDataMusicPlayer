@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="imageCell" customModule="MusicBattlesApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="375"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="faj-fy-ysN">
+                    <rect key="frame" x="0.0" y="48.5" width="382" height="326.5"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXV-fF-6U8">
+                    <rect key="frame" x="0.0" y="10" width="382" height="25.5"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="faj-fy-ysN" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="6lR-5f-EO6"/>
+                <constraint firstItem="NXV-fF-6U8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="9RN-1c-mB6"/>
+                <constraint firstItem="faj-fy-ysN" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="GHs-08-DIh"/>
+                <constraint firstItem="faj-fy-ysN" firstAttribute="top" secondItem="NXV-fF-6U8" secondAttribute="bottom" constant="13" id="Mxl-QY-ZYC"/>
+                <constraint firstAttribute="trailing" secondItem="NXV-fF-6U8" secondAttribute="trailing" id="cpf-Ch-pqV"/>
+                <constraint firstItem="faj-fy-ysN" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="e6x-XY-iOT"/>
+                <constraint firstItem="NXV-fF-6U8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="r8G-Cn-iD1"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="cellImage" destination="faj-fy-ysN" id="UoX-sZ-4c7"/>
+                <outlet property="cellLabel" destination="NXV-fF-6U8" id="dh1-Q6-Phk"/>
+            </connections>
+            <point key="canvasLocation" x="114.49275362318842" y="-84.709821428571431"/>
+        </view>
+    </objects>
+</document>

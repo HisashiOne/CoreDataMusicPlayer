@@ -9,6 +9,7 @@ target 'MusicBattlesApp' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SWSegmentedControl'
   pod 'TTGSnackbar'
+  pod 'SDWebImage', '~>3.7'
 
   # Pods for MusicBattlesApp
 

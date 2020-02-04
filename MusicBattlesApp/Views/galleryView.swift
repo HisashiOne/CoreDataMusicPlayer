@@ -9,7 +9,8 @@
 import UIKit
 
 class galleryView: UIView {
-
+    @IBOutlet weak var mainGridView: UICollectionView!
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

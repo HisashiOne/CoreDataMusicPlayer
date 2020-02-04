@@ -10,9 +10,14 @@ import UIKit
 import SWSegmentedControl
 import TTGSnackbar
 import CoreData
+import Alamofire
+import SwiftyJSON
+import SDWebImage
 
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  UITextViewDelegate {
+
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
+
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var navigationView: UIView!
@@ -26,6 +31,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var userCoreData = [User]()
     var userArray: Array<String> = []
     let imagePicker = UIImagePickerController()
+    let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+    let container: UIView = UIView()
+    
+     var tittleArray : [String] = [];
+     var imageArray : [String] = [];
     
     let sc = SWSegmentedControl(items: ["GALLERY", "PLAYER", "USER"])
     
@@ -53,11 +63,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         userDB = defaults.string(forKey: "user")
         
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+      
               
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-              view.addGestureRecognizer(tap)
+        //
         
         self.loadUsers()
         self.loadIndexUser()
@@ -88,6 +98,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         galleryView_.frame.origin.y =  self.containerView.frame.origin.y - 100
         containerView.addSubview(galleryView_)
         
+        galleryView_.mainGridView.dataSource = self
+        galleryView_.mainGridView.delegate = self
+        
+        
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 2, bottom: 10, right: 2)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 20
+        galleryView_.mainGridView.collectionViewLayout = layout
+        
+    
+    
+             
+        let nibCell = UINib(nibName: "imageCell", bundle:nil)
+        galleryView_.mainGridView.register(nibCell, forCellWithReuseIdentifier: "imageCell")
+        
+        
+        if Reachability_A.isConnectedToNetwork(){
+                  // Connect To Imgur Gallery
+            
+            showActivityIndicatory(uiView: galleryView_, container: container , actInd: actInd)
+            
+            loadGallery()
+                   
+        }else{
+        
+            let snackbar = TTGSnackbar(message: "Existe un errror con tu conexion a internet", duration: .middle)
+                  snackbar.show()
+                  
+            
+        }
+               
+        
+   
+        
         
         //PlayerView
         let bundle_2 = Bundle(for: playerView.self)
@@ -107,6 +153,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         containerView.addSubview(userView)
         userView.isHidden = true
         
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+              
+        userView.addGestureRecognizer(tap)
+        
         initUser()
     
         userView.logoutBTN.addTarget(self, action: #selector(logoutUser(_:)), for: .touchUpInside)
@@ -115,6 +166,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         
     }
+    
+    
     
     @objc func updateView(_ sender: Any) {
         
@@ -169,6 +222,140 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
          }
      }
      
+    
+    //PRAGMA MARK:Gallery View
+    func loadGallery(){
+        
+        let baseURL = "https://api.imgur.com/3/gallery/hot/viral/1?showViral=true&mature=false&album_previews=true"
+        let headers = ["Authorization": "Client-ID aac9ce38db7cdc6"]
+        
+        
+        Alamofire.request(baseURL, method: .get , parameters: nil ,encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
+            
+            self.actInd.stopAnimating()
+            self.container.isHidden = true
+            
+        
+            
+            if let status = response.response?.statusCode {
+                           switch(status){
+                           case 200:
+                             
+                            if let result = response.result.value {
+                            
+                            let json_ = JSON(result)
+                            let data =  json_["data"];
+                                
+                                
+                                self.tittleArray.removeAll()
+                                self.imageArray.removeAll()
+                                
+                                 for i in 0..<50{
+                                    
+                                    let title_ = data[i]["title"].string!
+                                    var  image_ = ""
+                                    
+                                    if data[i]["cover"].exists(){
+                                      image_ =   data[i]["cover"].string!
+                        
+                                    }
+                                    
+                                  
+                                    let imageURL = "https://i.imgur.com/\(image_).jpg"
+                                    self.tittleArray.append(title_)
+                                    self.imageArray.append(imageURL)
+                                }
+                              
+                                
+                                debugPrint("Imgur Response  Data Image \(self.imageArray) ")
+                                self.galleryView_.mainGridView.reloadData()
+                                
+                            }
+                             
+                            
+                            
+                            break
+                        
+                           default:
+                            
+                            let snackbar = TTGSnackbar(message: "Hubo un error intenta mas tarde", duration: .middle)
+                                snackbar.show()
+                            
+                            
+                            break
+                            
+                            
+                }
+            }
+                      
+                               
+                               
+        
+        }
+        
+        
+        
+        
+    }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tittleArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! imageCell
+        
+        cell.cellLabel.text = tittleArray[indexPath.row]
+        
+       
+        //cell.cellImage.sd_setShowActivityIndicatorView(true)
+        //cell.cellImage.sd_setIndicatorStyle(.whiteLarge)
+        cell.cellImage.sd_setImage(with: URL(string: imageArray[indexPath.row])) {  (image, error, imageCacheType, imageUrl) in
+            
+        }
+        
+       
+        
+        return cell
+           
+        
+    }
+    
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        var collectionViewSize = collectionView.frame.size
+         collectionViewSize.width = collectionViewSize.width/3.5 //Display Three elements in a row.
+         collectionViewSize.height = collectionViewSize.height/3.5
+         return collectionViewSize
+    }
+    
+    
+   
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+
+        
+        
+        let showAlert = UIAlertController(title: tittleArray[indexPath.row], message: nil, preferredStyle: .alert)
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 230))
+        imageView.sd_setImage(with: URL(string: imageArray[indexPath.row])) {  (image, error, imageCacheType, imageUrl) in
+                
+            }
+        showAlert.view.addSubview(imageView)
+        let height = NSLayoutConstraint(item: showAlert.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320)
+        let width = NSLayoutConstraint(item: showAlert.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
+        showAlert.view.addConstraint(height)
+        showAlert.view.addConstraint(width)
+        showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            // your actions here...
+        }))
+        self.present(showAlert, animated: true, completion: nil)
+        
+    }
     
     
     //PRAGMA MARK: UserView
