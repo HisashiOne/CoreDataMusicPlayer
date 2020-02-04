@@ -39,6 +39,11 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+         self.loadUsers()
+    }
+    
     
     //PRAGAMA MARK: Init Views
     private func initView(){
@@ -111,11 +116,11 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                    self.userCoreData = userCoreData
                    if userCoreData.count > 0 {
 
-            
-                    let userNames = userCoreData[0].user!
+                    
                     
                     debugPrint("User CoreData  DB Total  \(userCoreData)")
-                    debugPrint("User Array 0 \(userNames)")
+                
+                    userArray.removeAll()
                     
                     for index in 0..<userCoreData.count{
                                        

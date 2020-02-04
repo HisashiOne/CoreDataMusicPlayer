@@ -36,6 +36,10 @@ class LoginViewController: UIViewController {
         self.loadUsers()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+     self.loadUsers()
+    }
+    
     private func initViews(){
         
         userTXT.layer.cornerRadius = 10
@@ -161,10 +165,9 @@ class LoginViewController: UIViewController {
                       if userCoreData.count > 0 {
 
                
-                       let userNames = userCoreData[0].user!
-                       
+                        
                        debugPrint("User CoreData  DB Total  \(userCoreData)")
-                       debugPrint("User Array 0 \(userNames)")
+                       userArray.removeAll()
                        
                        for index in 0..<userCoreData.count{
                                           
