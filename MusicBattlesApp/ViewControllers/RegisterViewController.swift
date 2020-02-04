@@ -223,6 +223,9 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
             }else{
                 
                 self.saveUser()
+                let defaults = UserDefaults.standard
+                defaults.set(userTXT.text, forKey: "user")
+                self.performSegue(withIdentifier: "goToMain", sender: self)
             }
             
             

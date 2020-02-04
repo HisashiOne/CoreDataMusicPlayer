@@ -464,11 +464,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         debugPrint("Logout User")
         //self.dismiss(animated: true, completion: nil)
-       // self.navigationController?.popToRootViewController(animated: true)
+      
         
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "user")
-        _ = navigationController?.popViewController(animated: true)
+        
+         self.navigationController?.popToRootViewController(animated: true)
+        //_ = navigationController?.popViewController(animated: true)
         
     }
     
