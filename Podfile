@@ -10,6 +10,9 @@ target 'MusicBattlesApp' do
   pod 'SWSegmentedControl'
   pod 'TTGSnackbar'
   pod 'SDWebImage', '~>3.7'
+  pod 'SwiftySound'
+ 
+
 
   # Pods for MusicBattlesApp
 

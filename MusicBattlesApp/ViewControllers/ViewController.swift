@@ -13,10 +13,11 @@ import CoreData
 import Alamofire
 import SwiftyJSON
 import SDWebImage
+import AVFoundation
+import SwiftySound
 
 
-
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 
     
     @IBOutlet weak var containerView: UIView!
@@ -34,16 +35,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
     let container: UIView = UIView()
     
-     var tittleArray : [String] = [];
-     var imageArray : [String] = [];
+    var tittleArray : [String] = [];
     
+    var imageArray : [String] = [];
+
     let sc = SWSegmentedControl(items: ["GALLERY", "PLAYER", "USER"])
+    
+    let soundSamples : [String] = ["music_1", "music_2", "music_3"];
+    
+    var soundTest : [Sound] = []
+    private var sound_1: Sound?
+    private var sound_2: Sound?
+    private var sound_3: Sound?
+    var soundIndex: Int!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        
+
         
         sc.frame = self.navigationView.frame
         sc.titleColor = .white
@@ -143,6 +152,38 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         playerView_.frame.origin.y =  self.containerView.frame.origin.y - 100
         containerView.addSubview(playerView_)
         playerView_.isHidden = true
+        
+        
+        if let soundUrl = Bundle.main.url(forResource: "music_1", withExtension: "mp3") {
+            sound_1 = Sound(url: soundUrl)
+            }
+        
+        if let soundUrl2 = Bundle.main.url(forResource: "music_2", withExtension: "mp3") {
+                  sound_2 = Sound(url: soundUrl2)
+            }
+        if let soundUrl3 = Bundle.main.url(forResource: "music_3", withExtension: "mp3") {
+                         sound_3 = Sound(url: soundUrl3)
+            }
+             
+        soundTest.append(sound_1!)
+        soundTest.append(sound_2!)
+        soundTest.append(sound_3!)
+        
+        soundIndex = 0
+        
+        playerView_.playBTN.addTarget(self, action: #selector(playSound(_:)), for: .touchUpInside)
+        playerView_.stopBTN.addTarget(self, action: #selector(stopSound(_:)), for: .touchUpInside)
+        playerView_.nextBTN.addTarget(self, action: #selector(nextSound(_:)), for: .touchUpInside)
+        playerView_.prevBTN.addTarget(self, action: #selector(prevSound(_:)), for: .touchUpInside)
+        playerView_.volumenSlider.addTarget(self, action: #selector(sliderVolumeValueChanged(_:)), for: .valueChanged)
+            
+        playerView_.musicLBL.text = soundSamples[soundIndex]
+        
+      
+        
+        
+      
+        
         
         //UserView
         let bundle_3 = Bundle(for: userView_.self)
@@ -356,6 +397,65 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(showAlert, animated: true, completion: nil)
         
     }
+    
+    //PRAGMA MARK: Play Music
+    
+    @objc func playSound(_ sender: Any){
+        
+        soundTest[soundIndex].play()
+        //Sound.play(file: soundSamples[soundIndex] , fileExtension: "mp3", numberOfLoops: 0)
+
+    }
+    
+    @objc func stopSound(_ sender: Any){
+        Sound.stopAll()
+    }
+    
+    @objc func nextSound(_ sender: Any){
+        Sound.stopAll()
+        
+        if soundIndex != 2{
+            soundIndex = soundIndex + 1
+        }else{
+            soundIndex = 0
+        }
+        
+        
+            
+        playerView_.musicLBL.text = soundSamples[soundIndex]
+        soundTest[soundIndex].play()
+        
+    }
+    @objc func prevSound(_ sender: Any){
+        
+        Sound.stopAll()
+        if soundIndex != 0{
+            soundIndex = soundIndex - 1
+        }else{
+            soundIndex = 2
+        }
+        
+            
+        playerView_.musicLBL.text = soundSamples[soundIndex]
+        soundTest[soundIndex].play()
+        
+    
+        
+    }
+    
+    @objc func sliderVolumeValueChanged(_ sender: UISlider) {
+         soundTest[soundIndex].volume = sender.value
+        
+     }
+    
+    
+    
+
+    
+
+    
+   
+
     
     
     //PRAGMA MARK: UserView

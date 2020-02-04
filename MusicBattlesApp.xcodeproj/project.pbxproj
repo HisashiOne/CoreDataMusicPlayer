@@ -13,6 +13,9 @@
 		2119CAC423E8D3A3004F5EEC /* JsonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2119CAC323E8D3A3004F5EEC /* JsonModel.swift */; };
 		2119CAC623E8EA50004F5EEC /* imageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2119CAC523E8EA50004F5EEC /* imageCell.swift */; };
 		2119CAC823E8EA5F004F5EEC /* imageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2119CAC723E8EA5F004F5EEC /* imageCell.xib */; };
+		2119CAD223E91428004F5EEC /* music_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2119CAD123E91428004F5EEC /* music_1.mp3 */; };
+		2119CAD523E91A3B004F5EEC /* music_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2119CAD323E91A3A004F5EEC /* music_3.mp3 */; };
+		2119CAD623E91A3B004F5EEC /* music_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2119CAD423E91A3B004F5EEC /* music_2.mp3 */; };
 		2138C36A23E2A325008DF721 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C36923E2A325008DF721 /* AppDelegate.swift */; };
 		2138C36C23E2A325008DF721 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C36B23E2A325008DF721 /* SceneDelegate.swift */; };
 		2138C36E23E2A325008DF721 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138C36D23E2A325008DF721 /* ViewController.swift */; };
@@ -63,6 +66,9 @@
 		2119CAC323E8D3A3004F5EEC /* JsonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonModel.swift; sourceTree = "<group>"; };
 		2119CAC523E8EA50004F5EEC /* imageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageCell.swift; sourceTree = "<group>"; };
 		2119CAC723E8EA5F004F5EEC /* imageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = imageCell.xib; sourceTree = "<group>"; };
+		2119CAD123E91428004F5EEC /* music_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music_1.mp3; sourceTree = "<group>"; };
+		2119CAD323E91A3A004F5EEC /* music_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music_3.mp3; sourceTree = "<group>"; };
+		2119CAD423E91A3B004F5EEC /* music_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music_2.mp3; sourceTree = "<group>"; };
 		2138C36623E2A325008DF721 /* MusicBattlesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBattlesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2138C36923E2A325008DF721 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2138C36B23E2A325008DF721 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +147,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		2119CAD023E913F9004F5EEC /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				2119CAD423E91A3B004F5EEC /* music_2.mp3 */,
+				2119CAD323E91A3A004F5EEC /* music_3.mp3 */,
+				2119CAD123E91428004F5EEC /* music_1.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		2138C35D23E2A325008DF721 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +188,7 @@
 				2138C3B323E6B9FD008DF721 /* CoreData */,
 				2119CABF23E8D14E004F5EEC /* Libs */,
 				2119CAC223E8D360004F5EEC /* Models */,
+				2119CAD023E913F9004F5EEC /* Sounds */,
 				2138C36923E2A325008DF721 /* AppDelegate.swift */,
 				2138C36B23E2A325008DF721 /* SceneDelegate.swift */,
 				2138C36F23E2A325008DF721 /* Main.storyboard */,
@@ -376,9 +393,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2138C37923E2A329008DF721 /* LaunchScreen.storyboard in Resources */,
+				2119CAD623E91A3B004F5EEC /* music_2.mp3 in Resources */,
 				2119CAC823E8EA5F004F5EEC /* imageCell.xib in Resources */,
+				2119CAD223E91428004F5EEC /* music_1.mp3 in Resources */,
 				2138C3AA23E66EC1008DF721 /* userView.xib in Resources */,
 				2138C37623E2A329008DF721 /* Assets.xcassets in Resources */,
+				2119CAD523E91A3B004F5EEC /* music_3.mp3 in Resources */,
 				2138C37123E2A325008DF721 /* Main.storyboard in Resources */,
 				2138C3A623E66E46008DF721 /* galleryView.xib in Resources */,
 				2138C3A823E66E8F008DF721 /* playerView.xib in Resources */,
