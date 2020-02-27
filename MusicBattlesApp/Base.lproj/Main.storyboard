@@ -79,14 +79,14 @@
                                     <segue destination="xL6-lz-oHF" kind="show" id="h7F-M1-zjk"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rockFist" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-mn-feX">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-App-60x60" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-mn-feX">
                                 <rect key="frame" x="157" y="157" width="100" height="113"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="7ms-p7-FGH"/>
                                     <constraint firstAttribute="height" constant="113" id="YhY-A4-Lb0"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music Battle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoR-JG-X9T">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MusicApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoR-JG-X9T">
                                 <rect key="frame" x="138" y="301" width="138" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="muF-7z-YEN"/>
@@ -340,10 +340,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="rockFist" width="216" height="275"/>
+        <image name="Icon-App-60x60" width="60" height="60"/>
         <image name="userICS" width="216" height="224"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xS2-E3-pyv"/>
+        <segue reference="OjS-65-B6o"/>
     </inferredMetricsTieBreakers>
 </document>

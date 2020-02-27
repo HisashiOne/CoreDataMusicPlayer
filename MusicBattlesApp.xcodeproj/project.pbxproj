@@ -69,7 +69,7 @@
 		2119CAD123E91428004F5EEC /* music_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music_1.mp3; sourceTree = "<group>"; };
 		2119CAD323E91A3A004F5EEC /* music_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music_3.mp3; sourceTree = "<group>"; };
 		2119CAD423E91A3B004F5EEC /* music_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music_2.mp3; sourceTree = "<group>"; };
-		2138C36623E2A325008DF721 /* MusicBattlesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBattlesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2138C36623E2A325008DF721 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2138C36923E2A325008DF721 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2138C36B23E2A325008DF721 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2138C36D23E2A325008DF721 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 		2138C36723E2A325008DF721 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2138C36623E2A325008DF721 /* MusicBattlesApp.app */,
+				2138C36623E2A325008DF721 /* MusicApp.app */,
 				2138C37F23E2A329008DF721 /* MusicBattlesAppTests.xctest */,
 				2138C38A23E2A329008DF721 /* MusicBattlesAppUITests.xctest */,
 			);
@@ -303,7 +303,7 @@
 			);
 			name = MusicBattlesApp;
 			productName = MusicBattlesApp;
-			productReference = 2138C36623E2A325008DF721 /* MusicBattlesApp.app */;
+			productReference = 2138C36623E2A325008DF721 /* MusicApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2138C37E23E2A329008DF721 /* MusicBattlesAppTests */ = {
@@ -708,8 +708,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.MusicBattle.Oswaldo.MusicBattlesApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MusicBattle.Oswaldo.MusicApp;
+				PRODUCT_NAME = MusicApp;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -727,8 +727,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.MusicBattle.Oswaldo.MusicBattlesApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MusicBattle.Oswaldo.MusicApp;
+				PRODUCT_NAME = MusicApp;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
