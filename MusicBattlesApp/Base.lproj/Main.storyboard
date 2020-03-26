@@ -26,7 +26,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="MusicBattlesApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,7 +86,7 @@
                                     <constraint firstAttribute="height" constant="113" id="YhY-A4-Lb0"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MusicApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoR-JG-X9T">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music_App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoR-JG-X9T">
                                 <rect key="frame" x="138" y="301" width="138" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="muF-7z-YEN"/>
@@ -140,7 +140,7 @@
         <!--View Controller-->
         <scene sceneID="18N-cZ-VNz">
             <objects>
-                <viewController restorationIdentifier="homeVC" storyboardIdentifier="homeVC" modalPresentationStyle="fullScreen" id="rjq-hy-0pN" customClass="ViewController" customModule="MusicBattlesApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="homeVC" storyboardIdentifier="homeVC" modalPresentationStyle="fullScreen" id="rjq-hy-0pN" customClass="ViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gWs-HM-bcx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -185,7 +185,7 @@
         <!--Register View Controller-->
         <scene sceneID="iNf-q7-N6N">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="xL6-lz-oHF" customClass="RegisterViewController" customModule="MusicBattlesApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="xL6-lz-oHF" customClass="RegisterViewController" customModule="MusicApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7oY-jl-ceb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
